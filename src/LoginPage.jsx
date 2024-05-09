@@ -56,10 +56,10 @@ export default function LoginPage() {
                 <Paper
                     sx={{
                         width: 300,
-                        mx: 'auto', // margin left & right
-                        my: 25, // margin top & bottom
-                        py: 3, // padding top & bottom
-                        px: 2, // padding left & right
+                        mx: 'auto', 
+                        my: 25, 
+                        py: 3, 
+                        px: 2, 
                         display: 'flex',
                         flexDirection: 'column',
                         gap: 2,
@@ -79,10 +79,6 @@ export default function LoginPage() {
                     style={{height: '64px', borderRadius: '32px'}}
                 />
                 </Box>
-                    <Typography variant="h4" component="h1" sx={{fontSize: '2rem'}}>
-                        Welcome in IDEMIA!
-                    </Typography>
-                    <Typography variant="body2">Sign in to continue.</Typography>
                     <FormControl error={!!emailError}>
                         <TextField
                             sx={{fontFamily: 'Montserrat', borderRadius: '20px'}}
@@ -93,7 +89,7 @@ export default function LoginPage() {
                             type="email"
                             size="small"
                             InputProps={{style: {borderRadius: '20px'}}}
-                            placeholder="user@gmail.com"
+                            placeholder="user@edu.p.lodz.pl"
                             value={email}
                             onChange={handleEmailChange}
                         />
@@ -127,8 +123,7 @@ export default function LoginPage() {
                                 },
                             },
                         }}
-                    >
-                        Don't have an account? <Link href="https://www.wp.pl">Sign up</Link>
+                    >                      
                     </Typography>
                 </Paper>
             </Container>
