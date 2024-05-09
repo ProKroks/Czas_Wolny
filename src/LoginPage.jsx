@@ -7,13 +7,14 @@ import {ThemeProvider} from "@mui/material/styles";
 import logo from './Logo.jpg';
 
 const validatePassword = (password: string) => {
-    return password.length >= 3;
+    return password.length >= 6;
 };
 
-const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    return emailRegex.test(email);
-};
+const validateEmail = (email) => {
+    const re = /^[a-zA-Z0-9._%+-]+@edu\.p\.lodz\.pl$/;
+    return re.test(String(email).toLowerCase());
+}
+
 export default function LoginPage() {
     const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ export default function LoginPage() {
     const [emailError, setEmailError] = useState('');
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const minLength = 3;
+    const minLength = 6;
     const [isFormValid, setIsFormValid] = useState(false);
     useEffect(() => {
         setIsFormValid(validateEmail(email) && validatePassword(password));
@@ -81,7 +82,7 @@ export default function LoginPage() {
                 </Box>
                     <FormControl error={!!emailError}>
                         <TextField
-                            sx={{fontFamily: 'Montserrat', borderRadius: '20px'}}
+                            sx={{fontFamily: 'FallingSkyBd', borderRadius: '20px'}}
                             error={!!emailError}
                             helperText={!!emailError ? emailError : ''}
                             name="email"
@@ -96,7 +97,7 @@ export default function LoginPage() {
                     </FormControl>
                     <FormControl error={!!passwordError}>
                         <TextField
-                            sx={{fontFamily: 'Montserrat', borderRadius: '2rem'}}
+                            sx={{fontFamily: 'FallingSkyBd', borderRadius: '2rem'}}
                             error={!!passwordError}
                             helperText={!!passwordError ? passwordError : ''}
                             label="Password"
