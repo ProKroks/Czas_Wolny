@@ -5,7 +5,9 @@ import {useNavigate} from 'react-router-dom';
 import {theme, buttonFormsStyle} from "./AppStyles";
 import {ThemeProvider} from "@mui/material/styles";
 import logo from './Logo.jpg';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
+const auth = getAuth();
 const validatePassword = (password: string) => {
     return password.length >= 6;
 };
@@ -14,13 +16,15 @@ const validateEmail = (email) => {
     const re = /^[a-zA-Z0-9._%+-]+@edu\.p\.lodz\.pl$/;
     return re.test(String(email).toLowerCase());
 }
-
 export default function LoginPage() {
     const navigate = useNavigate();
-
-    const handleLogin = () => {
-        if (isFormValid) {
+    const handleLogin = async (email: string, password: string) => {
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
             navigate('/home');
+        } catch (error) {
+            console.error(error);
+            // Tutaj możesz obsłużyć błędy logowania, np. wyświetlić komunikat o błędzie
         }
     };
     const [email, setEmail] = useState('');
@@ -114,8 +118,8 @@ export default function LoginPage() {
                             onChange={handlePasswordChange}
                         />
                     </FormControl>
-                    <Button sx={buttonFormsStyle} onClick={handleLogin} disabled={!isFormValid}>
-                        Log in
+                    <Button sx={buttonFormsStyle} onClick={() => handleLogin(email, password)} disabled={!isFormValid}>
+                    Log in
                     </Button>
                     <Typography
                         fontSize="sm"
