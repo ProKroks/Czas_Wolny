@@ -67,6 +67,7 @@ export default function LoginPage() {
                         borderRadius: '8px',
                         boxShadow: 1
                     }}
+                    
                 ><Box
                     sx={{
                         display: 'flex',
@@ -80,6 +81,9 @@ export default function LoginPage() {
                     style={{height: '64px', borderRadius: '32px'}}
                 />
                 </Box>
+                <Typography variant="h4" align="center" gutterBottom>
+                        Witaj w aplikacji Czas Wolny
+                    </Typography>
                     <FormControl error={!!emailError}>
                         <TextField
                             sx={{fontFamily: 'FallingSkyBd', borderRadius: '20px'}}

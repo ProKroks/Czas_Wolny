@@ -2,7 +2,7 @@ import * as React from 'react';
 import {ThemeProvider} from '@mui/material/styles';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import LoginPage from './LoginPage';
-// import HomePage from './HomePage';
+import Home from './Home';
 import {theme} from "./AppStyles"
 
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={<LoginPage/>}/>
-                    <Route path="/home" element={<LoginPage/>}/>
+                    <Route path="/home" element={<Home/>}/>
                 </Routes>
             </Router>
         </ThemeProvider>
