@@ -5,9 +5,18 @@ import {useNavigate} from 'react-router-dom';
 import {theme, buttonFormsStyle} from "./AppStyles";
 import {ThemeProvider} from "@mui/material/styles";
 import logo from './Logo.jpg';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-const auth = getAuth();
+// import { initializeApp } from "firebase/app";
+// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+// const firebaseConfig = {
+//     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+//     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+//     projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+//     storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+//     messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+//     appId: process.env.REACT_APP_FIREBASE_APP_ID,
+// };
+// const app = initializeApp(firebaseConfig);
+// const auth = getAuth();
 const validatePassword = (password: string) => {
     return password.length >= 6;
 };
@@ -20,7 +29,7 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const handleLogin = async (email: string, password: string) => {
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            // await signInWithEmailAndPassword(auth, email, password);
             navigate('/home');
         } catch (error) {
             console.error(error);
@@ -98,6 +107,7 @@ export default function LoginPage() {
                             type="email"
                             size="small"
                             InputProps={{style: {borderRadius: '20px'}}}
+                            placeholder="Email" 
                             placeholder="user@edu.p.lodz.pl"
                             value={email}
                             onChange={handleEmailChange}

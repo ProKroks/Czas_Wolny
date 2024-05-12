@@ -1,7 +1,4 @@
 import {AppBar, Stack, createTheme, IconButton, Box, Toolbar, Typography, Menu, MenuList, MenuItem} from '@mui/material';
-
-
-
 export const theme = createTheme({
   palette: {
     primary: {
@@ -12,7 +9,7 @@ export const theme = createTheme({
     },
     text: {
       primary: '#000000',
-      secondary: '#FFFFFF',
+      secondary: '#2A78B6',
     },
   },
   typography: {
