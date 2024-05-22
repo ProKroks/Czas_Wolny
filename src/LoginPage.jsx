@@ -39,10 +39,11 @@ export default function LoginPage() {
             await signInWithEmailAndPassword(auth, email, password);
             navigate('/home');
         } catch (error) {
-            // console.log('Error logging in')
-            console.error(error);
-
-            // Obsługa błędów logowania, np. wyświetlenie komunikatu o błędzie
+            if (error.code === 'auth/invalid-credential') {
+                setPasswordError('Niepoprawne hasło');
+            } else {
+                console.error(error);
+            }
         }
     };
 
