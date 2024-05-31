@@ -1,0 +1,87 @@
+/* src/Home.css */
+.home {
+    text-align: center;
+    background-color: #337ab7;
+    color: white;
+}
+
+.group-and-events {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.group-container {
+    position: relative;
+    margin-right: 20px;
+}
+
+.group {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.group-list {
+    position: absolute;
+    top: 35px; /* Настройте это значение под вашу кнопку */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+
+.group-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.group-item:hover {
+    background-color: #f0f0f0;
+}
+
+.events {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.event {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+}
+
+.calendar {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-cell {
+    background-color: #e0e0e0;
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.calendar-cell.empty {
+    background-color: transparent;
+}
