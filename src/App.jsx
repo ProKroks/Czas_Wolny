@@ -3,7 +3,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import Home from './Home';
-import EventForm from './EventForm'; // Добавьте импорт компонента формы события
+import EventForm from './EventForm'; // Импорт компонента формы события
+import ConfirmationPage from './ConfirmationPage'; // Импорт компонента страницы подтверждения
 import { theme } from "./AppStyles";
 
 export default function App() {
@@ -13,7 +14,8 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<LoginPage />} />
                     <Route path="/home" element={<Home />} />
-                    <Route path="/add-event" element={<EventForm />} /> {/* Добавьте маршрут для формы события */}
+                    <Route path="/add-event" element={<EventForm />} /> {/* Маршрут для формы события */}
+                    <Route path="/confirmation" element={<ConfirmationPage />} /> {/* Маршрут для страницы подтверждения */}
                 </Routes>
             </Router>
         </ThemeProvider>

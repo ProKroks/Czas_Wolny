@@ -1,5 +1,6 @@
-/* src/components/EventForm.css */
+/* Styl formularza wydarzenia */
 .event-form {
+    position: relative;
     background-color: white;
     padding: 40px;
     border-radius: 15px;
@@ -7,4 +8,36 @@
     max-width: 600px;
     margin: 40px auto;
     text-align: left;
+}
+
+/* Styl logotypu */
+.logo {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100px; /* Dostosuj rozmiar logotypu według potrzeb */
+    height: auto;
+}
+
+/* Styl tytułu formularza */
+.form-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Styl przycisków */
+button {
+    background-color: #337ab7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Styl przycisku przy najechaniu */
+button:hover {
+    background-color: #286090;
 }

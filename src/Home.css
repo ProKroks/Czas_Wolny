@@ -1,87 +1,201 @@
-/* src/Home.css */
-.home {
-    text-align: center;
-    background-color: #337ab7;
-    color: white;
+/* Ustal styl do blokowania przewijania strony */
+html, body {
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
+/* Zewnętrzny kontener strony */
+.outer-container {
+    background-color: #337ab7; /* Niebieskie tło */
+    border-radius: 15px; /* Zaokrąglone rogi */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Szerokość kontenera */
+    max-width: 1200px; /* Maksymalna szerokość */
+    height: 90%; /* Zmniejszona wysokość */
+    margin: auto;
+    margin-top: 5vh; /* Odstęp od góry */
+}
+
+/* Główny kontener */
+.home {
+    text-align: center;
+    color: white;
+    height: 100%; /* Wysokość kontenera */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: #337ab7; /* Niebieskie tło */
+    border-radius: 15px; /* Zaokrąglone rogi */
+}
+
+/* Sekcja grup i wydarzeń */
 .group-and-events {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    gap: 20px;
 }
 
+/* Kontener grupy */
 .group-container {
     position: relative;
-    margin-right: 20px;
+    z-index: 2;
 }
 
-.group {
-    background-color: white;
-    color: black;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
+/* Przycisk grupy */
+.group-button {
+    background-color: #fff; /* Białe tło przycisku */
+    color: #337ab7; /* Niebieski tekst */
+    border-radius: 5px; /* Zaokrąglone rogi */
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #337ab7; /* Niebieska ramka */
 }
 
+/* Lista grup */
 .group-list {
     position: absolute;
-    top: 35px; /* Настройте это значение под вашу кнопку */
+    top: 50px;
     left: 0;
     width: 100%;
     background-color: white;
     color: black;
-    border-radius: 5px;
+    border-radius: 5px; /* Zaokrąglone rogi */
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 3;
 }
 
-
+/* Element listy grup */
 .group-item {
+    display: block;
+    width: 100%;
     padding: 10px;
+    text-align: left;
+    color: #337ab7; /* Niebieski tekst */
     cursor: pointer;
+    font-size: 14px;
 }
 
+/* Styl elementu listy grup przy najechaniu */
 .group-item:hover {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0; /* Jasnoszary kolor przy najechaniu */
 }
 
-.events {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    color: black;
-    padding: 10px;
-    border-radius: 5px;
+/* Karta wydarzeń */
+.events-card {
+    min-width: 275px;
+    border-radius: 10px; /* Zaokrąglone rogi */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.event {
-    margin: 5px 0;
-    padding: 5px;
-    background-color: #f0f0f0;
-    border-radius: 3px;
+/* Tytuł sekcji wydarzeń */
+.events-title {
+    border-bottom: 2px solid #000; /* Czarna dolna granica */
+    margin-bottom: 10px;
+    padding-bottom: 5px;
 }
 
+/* Element listy wydarzeń */
+.event-item {
+    margin-bottom: 1.5rem;
+}
+
+/* Kontener kalendarza */
 .calendar {
     background-color: white;
     color: black;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 10px; /* Zaokrąglone rogi */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 100%;
+    max-width: 800px;
 }
 
+/* Nagłówek kalendarza */
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Tytuł kalendarza */
+.calendar-title {
+    margin: 0 10px;
+}
+
+/* Styl nawigacji w kalendarzu */
+.calendar-nav {
+    color: inherit;
+}
+
+/* Styl wyłączonej nawigacji */
+.calendar-nav.disabled {
+    color: grey;
+}
+
+/* Nazwy dni tygodnia */
+.day-names {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+/* Styl dla nazw dni tygodnia */
+.day-name {
+    text-align: center;
+    font-weight: bold;
+    color: white; /* Kolor tekstu nazw dni */
+    background-color: #5a9bd3; /* Kolor tła nazw dni */
+    padding: 5px;
+    border-radius: 5px; /* Zaokrąglone rogi */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Siatka kalendarza */
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
 }
 
+/* Komórki kalendarza */
 .calendar-cell {
     background-color: #e0e0e0;
     padding: 10px;
-    border-radius: 3px;
+    border-radius: 3px; /* Zaokrąglone rogi */
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
+/* Styl komórki kalendarza przy najechaniu */
+.calendar-cell:hover {
+    background-color: #bdbdbd;
+}
+
+/* Puste komórki kalendarza */
 .calendar-cell.empty {
     background-color: transparent;
+}
+
+/* Styl dla dzisiejszej daty */
+.calendar-cell.today {
+    background-color: #4caf50; /* Zielony kolor */
+    color: white;
+    font-weight: bold;
+}
+
+/* Przycisk dodania wydarzenia */
+.add-event-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
