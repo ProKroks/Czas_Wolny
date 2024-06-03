@@ -16,6 +16,7 @@ export default function App() {
                     <Route path="/home" element={<Home />} />
                     <Route path="/add-event" element={<EventForm />} /> {/* Маршрут для формы события */}
                     <Route path="/confirmation" element={<ConfirmationPage />} /> {/* Маршрут для страницы подтверждения */}
+                    <Route path="/login" element={<LoginPage />} /> {/* Маршрут для страницы логина */}
                 </Routes>
             </Router>
         </ThemeProvider>
