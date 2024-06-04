@@ -74,7 +74,7 @@ export default function SignUp() {
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newPassword = event.target.value;
         setPassword(newPassword);
-        setPasswordError(validatePassword(newPassword) ? '' : `Password must be at least ${minLength} characters`);
+        setPasswordError(validatePassword(newPassword) ? '' : `Hasło musi mieć przynajmniej ${minLength} znaków`);
     };
     return (
         <ThemeProvider theme={theme}>
