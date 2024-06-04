@@ -31,20 +31,23 @@ const validateEmail = (email: string) => {
     const re = /^[a-zA-Z0-9._%+-]+@edu\.p\.lodz\.pl$/;
     return re.test(String(email).toLowerCase());
 }
-// const handlePasswordConfirmChange = (event) => {
-//     setPasswordConfirm(event.target.value);
-// };
+
 export default function SignUp() {
-    // const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [hasUserStartedTypingConfirmPassword, setHasUserStartedTypingConfirmPassword] = useState(false);
     const navigate = useNavigate();
+    const handlePasswordConfirmChange = (event) => {
+        setHasUserStartedTypingConfirmPassword(true);
+        setPasswordConfirm(event.target.value);
+    };
     const handleSignUp = async (email, password) => {
-        // if (password !== passwordConfirm) {
-        //     alert('Hasła nie są takie same');
-        //     return;
-        // }
+        if (password !== passwordConfirm) {
+            alert('Hasła nie są takie same');
+            return;
+        }
         try {
             await createUserWithEmailAndPassword(auth, email, password);
-            // po udanej rejestracji, przekieruj do strony logowania
+
             navigate('/');
         } catch (error) {
             console.error(error);
@@ -143,24 +146,22 @@ export default function SignUp() {
                             onChange={handlePasswordChange}
                         />
                     </FormControl>
-                    {/*<FormControl error={!!passwordError}>*/}
-                    {/*    <TextField*/}
-                    {/*        sx={{fontFamily: 'FallingSkyBd', borderRadius: '2rem'}}*/}
-                    {/*        error={!!passwordError}*/}
-                    {/*        helperText={!!passwordError ? passwordError : ''}*/}
-                    {/*        label="Potwierdź hasło"*/}
-                    {/*        name="passwordConfirm"*/}
-                    {/*        type="password"*/}
-                    {/*        placeholder="potwierdź hasło"*/}
-                    {/*        size="small"*/}
-                    {/*        InputProps={{style: {borderRadius: '20px'}}}*/}
-                    {/*        value={passwordConfirm}*/}
-                    {/*        onChange={handlePasswordConfirmChange}*/}
-                    {/*    />*/}
-                    {/*</FormControl>*/}
-
-
-                    <Button sx={buttonFormsStyle} onClick={() => handleSignUp(email, password)}
+                    <FormControl error={hasUserStartedTypingConfirmPassword }>
+                        <TextField
+                            sx={{fontFamily: 'FallingSkyBd', borderRadius: '2rem'}}
+                            rror={hasUserStartedTypingConfirmPassword && !!passwordError}
+                            helperText={hasUserStartedTypingConfirmPassword && !!passwordError ? passwordError : ''}
+                            label="Potwierdź hasło"
+                            name="passwordConfirm"
+                            type="password"
+                            placeholder="potwierdź hasło"
+                            size="small"
+                            InputProps={{style: {borderRadius: '20px'}}}
+                            value={passwordConfirm}
+                            onChange={handlePasswordConfirmChange}
+                        />
+                    </FormControl>
+                    <Button sx={buttonFormsStyle} onClick={() => handleSignUp(email, password, passwordConfirm)}
                             disabled={!isFormValid}>
                         Sing Up
                     </Button>
