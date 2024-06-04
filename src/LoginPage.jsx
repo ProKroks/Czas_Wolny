@@ -67,7 +67,7 @@ export default function LoginPage() {
     const handlePasswordChange = (event) => {
         const newPassword = event.target.value;
         setPassword(newPassword);
-        setPasswordError(validatePassword(newPassword) ? '' : `Password must be at least ${minLength} characters`);
+        setPasswordError(validatePassword(newPassword) ? '' : `Hasło musi mieć przynajmniej ${minLength} znaków`);
     };
 
     const handleSubmit = (event) => {
