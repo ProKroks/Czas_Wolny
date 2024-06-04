@@ -12,7 +12,7 @@ export default function App() {
         <ThemeProvider theme={theme}>
             <Router>
                 <Routes>
-                    <Route path="/signup" component={SignUp}/>
+                    <Route path="/signup" element={<SignUp />} />
                     <Route path="/" element={<LoginPage/>}/>
                     <Route path="/home" element={<Home/>}/>
                 </Routes>

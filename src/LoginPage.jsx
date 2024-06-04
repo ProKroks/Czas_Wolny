@@ -7,7 +7,6 @@ import {ThemeProvider} from "@mui/material/styles";
 import logo from './Logo.jpg';
 import {initializeApp} from "firebase/app";
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
-// LoginPage.js
 import { Link } from 'react-router-dom';
 
 // W komponencie renderującym
