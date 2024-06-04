@@ -1,21 +1,23 @@
-import {AppBar, Stack, createTheme, IconButton, Box, Toolbar, Typography, Menu, MenuList, MenuItem} from '@mui/material';
+import { createTheme } from '@mui/material';
+
 export const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#2A78B6',
+    palette: {
+        primary: {
+            main: '#2A78B6',
+        },
+        secondary: {
+            main: '#CDECFE',
+        },
+        text: {
+            primary: '#000000',
+            secondary: '#2A78B6',
+        },
     },
-    secondary: {
-      main: '#CDECFE',
+    typography: {
+        allVariants: { fontFamily: 'FallingSkyBd, FallingSkyBlk' }
     },
-    text: {
-      primary: '#000000',
-      secondary: '#2A78B6',
-    },
-  },
-  typography: {
-    allVariants: { fontFamily: 'FallingSkyBd, FallingSkyBlk' }
-  },
 });
+
 export const buttonFormsStyle = {
     fontFamily: 'FallingSkyBd',
     width: '100%',
