@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { Container, Box, Paper, Typography, FormControl, TextField, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { theme, buttonFormsStyle } from "./AppStyles";
-import { ThemeProvider } from "@mui/material/styles";
+import {useState, useEffect} from 'react';
+import {Container, Box, Paper, Typography, FormControl, TextField, Button} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
+import {theme, buttonFormsStyle} from "./AppStyles";
+import {ThemeProvider} from "@mui/material/styles";
 import logo from './Logo.jpg';
 import {initializeApp} from "firebase/app";
-import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
-import { Link } from 'react-router-dom';
+import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyBVWhM-O4lQmCnxKtik0rS-YTR_ToevCaA",
@@ -19,31 +19,39 @@ const firebaseConfig = {
     measurementId: "G-9DSZW3WWT5"
 };
 
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-const validatePassword = (password) => {
+const validatePassword = (password: string) => {
     return password.length >= 6;
 };
 
-const validateEmail = (email) => {
+const validateEmail = (email: string) => {
     const re = /^[a-zA-Z0-9._%+-]+@edu\.p\.lodz\.pl$/;
     return re.test(String(email).toLowerCase());
 }
 
-export default function LoginPage() {
-    const navigate = useNavigate();
 
-    const handleLogin = async (email, password) => {
+export default function SignUp() {
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [hasUserStartedTypingConfirmPassword, setHasUserStartedTypingConfirmPassword] = useState(false);
+    const navigate = useNavigate();
+    const handlePasswordConfirmChange = (event) => {
+        setHasUserStartedTypingConfirmPassword(true);
+        setPasswordConfirm(event.target.value);
+    };
+    const handleSignUp = async (email, password) => {
+        if (password !== passwordConfirm) {
+            alert('Hasła nie są takie same');
+            return;
+        }
         try {
-            await signInWithEmailAndPassword(auth, email, password);
-            navigate('/home');
+            await createUserWithEmailAndPassword(auth, email, password);
+            // po udanej rejestracji, przekieruj do strony logowania
+            navigate('/');
         } catch (error) {
-            if (error.code === 'auth/invalid-credential') {
-                setPasswordError('Niepoprawne hasło');
-            } else {
-                console.error(error);
-            }
+            console.error(error);
         }
     };
 
@@ -55,28 +63,19 @@ export default function LoginPage() {
     const [isFormValid, setIsFormValid] = useState(false);
 
     useEffect(() => {
-        setIsFormValid(validateEmail(email) && validatePassword(password));
-    }, [email, password]);
-
-    const handleEmailChange = (event) => {
+        setIsFormValid(emailError === '' && passwordError === '' && email !== '' && password !== '' && password === passwordConfirm);
+    }, [emailError, passwordError, email, password, passwordConfirm]);
+    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = event.target.value;
         setEmail(newEmail);
         setEmailError(validateEmail(newEmail) ? '' : 'Invalid email address');
     };
 
-    const handlePasswordChange = (event) => {
+    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newPassword = event.target.value;
         setPassword(newPassword);
         setPasswordError(validatePassword(newPassword) ? '' : `Password must be at least ${minLength} characters`);
     };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (isFormValid) {
-            handleLogin(email, password);
-        }
-    };
-
     return (
         <ThemeProvider theme={theme}>
             <Container sx={{
@@ -87,8 +86,6 @@ export default function LoginPage() {
                 alignItems: 'center'
             }}>
                 <Paper
-                    component="form"
-                    onSubmit={handleSubmit}
                     sx={{
                         width: 300,
                         mx: 'auto',
@@ -113,22 +110,22 @@ export default function LoginPage() {
                         <img
                             src={logo}
                             alt="Company Logo"
-                            style={{ height: '64px', borderRadius: '32px' }}
+                            style={{height: '64px', borderRadius: '32px'}}
                         />
                     </Box>
                     <Typography variant="h4" align="center" gutterBottom>
-                        Witaj w aplikacji Czas Wolny
+                        Zajerestruj się
                     </Typography>
                     <FormControl error={!!emailError}>
                         <TextField
-                            sx={{ fontFamily: 'FallingSkyBd', borderRadius: '20px' }}
+                            sx={{fontFamily: 'FallingSkyBd', borderRadius: '20px'}}
                             error={!!emailError}
                             helperText={!!emailError ? emailError : ''}
                             name="email"
                             label="Email"
                             type="email"
                             size="small"
-                            InputProps={{ style: { borderRadius: '20px' } }}
+                            InputProps={{style: {borderRadius: '20px'}}}
                             placeholder="user@edu.p.lodz.pl"
                             value={email}
                             onChange={handleEmailChange}
@@ -136,7 +133,7 @@ export default function LoginPage() {
                     </FormControl>
                     <FormControl error={!!passwordError}>
                         <TextField
-                            sx={{ fontFamily: 'FallingSkyBd', borderRadius: '2rem' }}
+                            sx={{fontFamily: 'FallingSkyBd', borderRadius: '2rem'}}
                             error={!!passwordError}
                             helperText={!!passwordError ? passwordError : ''}
                             label="Password"
@@ -144,13 +141,29 @@ export default function LoginPage() {
                             type="password"
                             placeholder="password"
                             size="small"
-                            InputProps={{ style: { borderRadius: '20px' } }}
+                            InputProps={{style: {borderRadius: '20px'}}}
                             value={password}
                             onChange={handlePasswordChange}
                         />
                     </FormControl>
-                    <Button sx={buttonFormsStyle} type="submit" disabled={!isFormValid}>
-                        Log in
+                    <FormControl error={hasUserStartedTypingConfirmPassword && passwordConfirm !== password}>
+                        <TextField
+                            sx={{fontFamily: 'FallingSkyBd', borderRadius: '2rem'}}
+                            error={hasUserStartedTypingConfirmPassword && passwordConfirm !== password}
+                            helperText={hasUserStartedTypingConfirmPassword && passwordConfirm !== password ? 'Hasła nie są takie same' : ''}
+                            label="Potwierdź hasło"
+                            name="passwordConfirm"
+                            type="password"
+                            placeholder="potwierdź hasło"
+                            size="small"
+                            InputProps={{style: {borderRadius: '20px'}}}
+                            value={passwordConfirm}
+                            onChange={handlePasswordConfirmChange}
+                        />
+                    </FormControl>
+                    <Button sx={buttonFormsStyle} onClick={() => handleSignUp(email, password, passwordConfirm)}
+                            disabled={!isFormValid}>
+                        Sing Up
                     </Button>
                     <Typography
                         fontSize="sm"
@@ -165,7 +178,6 @@ export default function LoginPage() {
                         }}
                     >
                     </Typography>
-                    <Link to="/signup">Zarejestruj się</Link>
                 </Paper>
             </Container>
         </ThemeProvider>
