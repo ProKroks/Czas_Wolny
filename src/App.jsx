@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import LoginPage from './LoginPage';
 import Home from './Home';
 import {theme} from "./AppStyles"
+import SignUp from "./SignUp";
 
 export default function App() {
 
@@ -11,6 +12,7 @@ export default function App() {
         <ThemeProvider theme={theme}>
             <Router>
                 <Routes>
+                    <Route path="/signup" component={SignUp}/>
                     <Route path="/" element={<LoginPage/>}/>
                     <Route path="/home" element={<Home/>}/>
                 </Routes>

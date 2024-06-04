@@ -7,6 +7,10 @@ import {ThemeProvider} from "@mui/material/styles";
 import logo from './Logo.jpg';
 import {initializeApp} from "firebase/app";
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+// LoginPage.js
+import { Link } from 'react-router-dom';
+
+// W komponencie renderującym
 
 const firebaseConfig = {
     apiKey: "AIzaSyBVWhM-O4lQmCnxKtik0rS-YTR_ToevCaA",
@@ -156,6 +160,7 @@ export default function LoginPage() {
                         }}
                     >
                     </Typography>
+                    <Link to="/signup">Zarejestruj się</Link>
                 </Paper>
             </Container>
         </ThemeProvider>
