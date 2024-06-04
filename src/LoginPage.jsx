@@ -1,15 +1,13 @@
 import * as React from 'react';
-import {useState, useEffect} from 'react';
-import {Container, Box, Paper, Typography, FormControl, TextField, Button} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
-import {theme, buttonFormsStyle} from "./AppStyles";
-import {ThemeProvider} from "@mui/material/styles";
+import { useState, useEffect } from 'react';
+import { Container, Box, Paper, Typography, FormControl, TextField, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { theme, buttonFormsStyle } from "./AppStyles";
+import { ThemeProvider } from "@mui/material/styles";
 import logo from './Logo.jpg';
 import {initializeApp} from "firebase/app";
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import { Link } from 'react-router-dom';
-
-// W komponencie renderującym
 
 const firebaseConfig = {
     apiKey: "AIzaSyBVWhM-O4lQmCnxKtik0rS-YTR_ToevCaA",
@@ -21,15 +19,14 @@ const firebaseConfig = {
     measurementId: "G-9DSZW3WWT5"
 };
 
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-const validatePassword = (password: string) => {
+const validatePassword = (password) => {
     return password.length >= 6;
 };
 
-const validateEmail = (email: string) => {
+const validateEmail = (email) => {
     const re = /^[a-zA-Z0-9._%+-]+@edu\.p\.lodz\.pl$/;
     return re.test(String(email).toLowerCase());
 }
@@ -37,7 +34,7 @@ const validateEmail = (email: string) => {
 export default function LoginPage() {
     const navigate = useNavigate();
 
-    const handleLogin = async (email: string, password: string) => {
+    const handleLogin = async (email, password) => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             navigate('/home');
@@ -61,16 +58,23 @@ export default function LoginPage() {
         setIsFormValid(validateEmail(email) && validatePassword(password));
     }, [email, password]);
 
-    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleEmailChange = (event) => {
         const newEmail = event.target.value;
         setEmail(newEmail);
         setEmailError(validateEmail(newEmail) ? '' : 'Invalid email address');
     };
 
-    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handlePasswordChange = (event) => {
         const newPassword = event.target.value;
         setPassword(newPassword);
         setPasswordError(validatePassword(newPassword) ? '' : `Password must be at least ${minLength} characters`);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (isFormValid) {
+            handleLogin(email, password);
+        }
     };
 
     return (
@@ -83,6 +87,8 @@ export default function LoginPage() {
                 alignItems: 'center'
             }}>
                 <Paper
+                    component="form"
+                    onSubmit={handleSubmit}
                     sx={{
                         width: 300,
                         mx: 'auto',
@@ -107,7 +113,7 @@ export default function LoginPage() {
                         <img
                             src={logo}
                             alt="Company Logo"
-                            style={{height: '64px', borderRadius: '32px'}}
+                            style={{ height: '64px', borderRadius: '32px' }}
                         />
                     </Box>
                     <Typography variant="h4" align="center" gutterBottom>
@@ -115,14 +121,14 @@ export default function LoginPage() {
                     </Typography>
                     <FormControl error={!!emailError}>
                         <TextField
-                            sx={{fontFamily: 'FallingSkyBd', borderRadius: '20px'}}
+                            sx={{ fontFamily: 'FallingSkyBd', borderRadius: '20px' }}
                             error={!!emailError}
                             helperText={!!emailError ? emailError : ''}
                             name="email"
                             label="Email"
                             type="email"
                             size="small"
-                            InputProps={{style: {borderRadius: '20px'}}}
+                            InputProps={{ style: { borderRadius: '20px' } }}
                             placeholder="user@edu.p.lodz.pl"
                             value={email}
                             onChange={handleEmailChange}
@@ -130,7 +136,7 @@ export default function LoginPage() {
                     </FormControl>
                     <FormControl error={!!passwordError}>
                         <TextField
-                            sx={{fontFamily: 'FallingSkyBd', borderRadius: '2rem'}}
+                            sx={{ fontFamily: 'FallingSkyBd', borderRadius: '2rem' }}
                             error={!!passwordError}
                             helperText={!!passwordError ? passwordError : ''}
                             label="Password"
@@ -138,12 +144,12 @@ export default function LoginPage() {
                             type="password"
                             placeholder="password"
                             size="small"
-                            InputProps={{style: {borderRadius: '20px'}}}
+                            InputProps={{ style: { borderRadius: '20px' } }}
                             value={password}
                             onChange={handlePasswordChange}
                         />
                     </FormControl>
-                    <Button sx={buttonFormsStyle} onClick={() => handleLogin(email, password)} disabled={!isFormValid}>
+                    <Button sx={buttonFormsStyle} type="submit" disabled={!isFormValid}>
                         Log in
                     </Button>
                     <Typography
