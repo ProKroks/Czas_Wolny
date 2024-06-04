@@ -150,7 +150,7 @@ export default function LoginPage() {
                         />
                     </FormControl>
                     <Button sx={buttonFormsStyle} type="submit" disabled={!isFormValid}>
-                        Log in
+                        Zaloguj się
                     </Button>
                     <Typography
                         fontSize="sm"
