@@ -163,7 +163,7 @@ export default function SignUp() {
                     </FormControl>
                     <Button sx={buttonFormsStyle} onClick={() => handleSignUp(email, password, passwordConfirm)}
                             disabled={!isFormValid}>
-                        Sing Up
+                        Zarejestruj się
                     </Button>
                     <Typography
                         fontSize="sm"
