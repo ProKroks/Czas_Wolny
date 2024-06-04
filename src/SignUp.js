@@ -146,11 +146,11 @@ export default function SignUp() {
                             onChange={handlePasswordChange}
                         />
                     </FormControl>
-                    <FormControl error={hasUserStartedTypingConfirmPassword }>
+                    <FormControl error={hasUserStartedTypingConfirmPassword && passwordConfirm !== password}>
                         <TextField
                             sx={{fontFamily: 'FallingSkyBd', borderRadius: '2rem'}}
-                            rror={hasUserStartedTypingConfirmPassword && !!passwordError}
-                            helperText={hasUserStartedTypingConfirmPassword && !!passwordError ? passwordError : ''}
+                            error={hasUserStartedTypingConfirmPassword && passwordConfirm !== password}
+                            helperText={hasUserStartedTypingConfirmPassword && passwordConfirm !== password ? 'Hasła nie są takie same' : ''}
                             label="Potwierdź hasło"
                             name="passwordConfirm"
                             type="password"
