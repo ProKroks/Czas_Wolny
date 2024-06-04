@@ -32,6 +32,7 @@ const validateEmail = (email: string) => {
     return re.test(String(email).toLowerCase());
 }
 
+
 export default function SignUp() {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [hasUserStartedTypingConfirmPassword, setHasUserStartedTypingConfirmPassword] = useState(false);
@@ -47,7 +48,7 @@ export default function SignUp() {
         }
         try {
             await createUserWithEmailAndPassword(auth, email, password);
-
+            // po udanej rejestracji, przekieruj do strony logowania
             navigate('/');
         } catch (error) {
             console.error(error);
@@ -62,8 +63,8 @@ export default function SignUp() {
     const [isFormValid, setIsFormValid] = useState(false);
 
     useEffect(() => {
-        setIsFormValid(emailError === '' && passwordError === '' && email !== '' && password !== '');
-    }, [emailError, passwordError, email, password]);
+        setIsFormValid(emailError === '' && passwordError === '' && email !== '' && password !== '' && password === passwordConfirm);
+    }, [emailError, passwordError, email, password, passwordConfirm]);
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = event.target.value;
         setEmail(newEmail);
@@ -75,7 +76,6 @@ export default function SignUp() {
         setPassword(newPassword);
         setPasswordError(validatePassword(newPassword) ? '' : `Password must be at least ${minLength} characters`);
     };
-
     return (
         <ThemeProvider theme={theme}>
             <Container sx={{
