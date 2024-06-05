@@ -68,7 +68,7 @@ export default function SignUp() {
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = event.target.value;
         setEmail(newEmail);
-        setEmailError(validateEmail(newEmail) ? '' : 'Invalid email address');
+        setEmailError(validateEmail(newEmail) ? '' : 'Niepoprawny adres email');
     };
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
