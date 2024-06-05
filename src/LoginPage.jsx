@@ -27,7 +27,8 @@ const validatePassword = (password) => {
 };
 
 const validateEmail = (email) => {
-    const re = /^[a-zA-Z0-9._%+-]+@edu\.p\.lodz\.pl$/;
+    const re = /^[a-zA-Z0-9._%+-]+@(edu\.p\.lodz\.pl|p.lodz\.pl)$/;
+
     return re.test(String(email).toLowerCase());
 }
 
