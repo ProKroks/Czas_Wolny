@@ -61,7 +61,7 @@ export default function LoginPage() {
     const handleEmailChange = (event) => {
         const newEmail = event.target.value;
         setEmail(newEmail);
-        setEmailError(validateEmail(newEmail) ? '' : 'Invalid email address');
+        setEmailError(validateEmail(newEmail) ? '' : 'Niepoprawny adres email');
     };
 
     const handlePasswordChange = (event) => {
