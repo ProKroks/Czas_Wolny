@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {useState, useEffect} from 'react';
-import {Container, Box, Paper, Typography, FormControl, TextField, Button} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
-import {theme, buttonFormsStyle} from "./AppStyles";
-import {ThemeProvider} from "@mui/material/styles";
+import { useState, useEffect } from 'react';
+import { Container, Box, Paper, Typography, FormControl, TextField, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { theme, buttonFormsStyle } from "./AppStyles";
+import { ThemeProvider } from "@mui/material/styles";
 import logo from './Logo.jpg';
 import {initializeApp} from "firebase/app";
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBVWhM-O4lQmCnxKtik0rS-YTR_ToevCaA",
@@ -28,7 +28,6 @@ const validatePassword = (password) => {
 
 const validateEmail = (email) => {
     const re = /^[a-zA-Z0-9._%+-]+@(edu\.p\.lodz\.pl|p.lodz\.pl)$/;
-
     return re.test(String(email).toLowerCase());
 }
 
@@ -114,7 +113,7 @@ export default function LoginPage() {
                         <img
                             src={logo}
                             alt="Company Logo"
-                            style={{height: '64px', borderRadius: '32px'}}
+                            style={{ height: '64px', borderRadius: '32px' }}
                         />
                     </Box>
                     <Typography variant="h4" align="center" gutterBottom>
@@ -122,14 +121,14 @@ export default function LoginPage() {
                     </Typography>
                     <FormControl error={!!emailError}>
                         <TextField
-                            sx={{fontFamily: 'FallingSkyBd', borderRadius: '20px'}}
+                            sx={{ fontFamily: 'FallingSkyBd', borderRadius: '20px' }}
                             error={!!emailError}
                             helperText={!!emailError ? emailError : ''}
                             name="email"
                             label="Email"
                             type="email"
                             size="small"
-                            InputProps={{style: {borderRadius: '20px'}}}
+                            InputProps={{ style: { borderRadius: '20px' } }}
                             placeholder="user@edu.p.lodz.pl"
                             value={email}
                             onChange={handleEmailChange}
@@ -137,7 +136,7 @@ export default function LoginPage() {
                     </FormControl>
                     <FormControl error={!!passwordError}>
                         <TextField
-                            sx={{fontFamily: 'FallingSkyBd', borderRadius: '2rem'}}
+                            sx={{ fontFamily: 'FallingSkyBd', borderRadius: '2rem' }}
                             error={!!passwordError}
                             helperText={!!passwordError ? passwordError : ''}
                             label="Password"
@@ -145,7 +144,7 @@ export default function LoginPage() {
                             type="password"
                             placeholder="password"
                             size="small"
-                            InputProps={{style: {borderRadius: '20px'}}}
+                            InputProps={{ style: { borderRadius: '20px' } }}
                             value={password}
                             onChange={handlePasswordChange}
                         />
