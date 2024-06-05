@@ -126,7 +126,7 @@ export default function SignUp() {
                             type="email"
                             size="small"
                             InputProps={{style: {borderRadius: '20px'}}}
-                            placeholder="user@edu.p.lodz.pl"
+                            placeholder="user@p.lodz.pl"
                             value={email}
                             onChange={handleEmailChange}
                         />
